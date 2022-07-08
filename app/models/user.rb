@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+         validates :login, presence: true  
+
   def email_required?
     false
   end
@@ -11,6 +13,9 @@ class User < ApplicationRecord
   def email_changed?
     false
   end
-
+  
+  def will_save_change_to_email?
+    false
+  end
 
  end

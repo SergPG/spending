@@ -1,4 +1,16 @@
 <h1>Expenses#index</h1>
 <p>Find me in app/views/expenses/index.html.erb</p>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<%# <p class="notice"><%= notice %>
+<%# <p class="alert"><%= alert %>
+
+<% if user_signed_in? %>
+  <p> Hello <%= current_user.login %> </p> 
+<% else %> 
+  <p> Not User </p>
+<% end %>
+
+ <% if user_signed_in?   %>
+                  <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-link nav-link active" %>
+                <% else %>  
+                  <%= link_to "Log in", new_user_session_path, class: "nav-link active"  %>
+                <% end %>
