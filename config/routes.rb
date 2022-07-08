@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root "expenses#index"
+  root to: "expenses#index"
 
   resources :expenses
 end
