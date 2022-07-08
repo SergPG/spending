@@ -1,0 +1,24 @@
+# PostgreSQL. Versions 9.3 and up are supported.
+#
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  host: <%= ENV['DB_HODT']%>
+  username: <%= ENV['DB_USERNAME']%>
+  password: <%= ENV['DB_PASSWORD']%>
+
+development:
+  <<: *default
+  database: spending_development
+
+test:
+  <<: *default
+  database: spending_test
+
+production:
+  <<: *default
+  database: spending_production
+  # username: spending
+  # password: <%= ENV["SPENDING_DATABASE_PASSWORD"] %>
