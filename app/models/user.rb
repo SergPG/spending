@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
          validates :login, presence: true  
 
+  has_many :expenses 
+
   def email_required?
     false
   end
@@ -18,4 +20,4 @@ class User < ApplicationRecord
     false
   end
 
- end
+end
