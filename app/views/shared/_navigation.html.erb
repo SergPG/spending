@@ -23,7 +23,32 @@
                                     <li><a class="dropdown-item" href="portfolio-item.html">Portfolio Item</a></li>
                                 </ul>
                             </li>
+
+                            <li class="nav-item mx-3">
+
+                            <% if user_signed_in? %>
+
+                             <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-light text-dark me-2" %>
+
+                            <% else %> 
+
+                            <%= link_to "Log in", new_user_session_path, class: "btn btn-primary"  %>
+
+                             <% end %>  
+                           
+                            
+                            </li>
+
+
+
+                            
                         </ul>
                     </div>
                 </div>
-            </nav>
+            
+    
+    
+    </nav>
+
+
+    

@@ -7,6 +7,8 @@ class User < ApplicationRecord
          validates :login, presence: true  
 
   has_many :expenses 
+  has_many :categories, through: :expenses
+
 
   def email_required?
     false
