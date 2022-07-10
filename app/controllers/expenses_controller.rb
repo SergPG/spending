@@ -11,9 +11,7 @@ class ExpensesController < ApplicationController
 
   def new
     @expense = Expense.new(params.permit(:category_id))
-    @categories = Category.all
-
-    
+    @categories = Category.all   
   end
 
   def create
@@ -33,7 +31,8 @@ class ExpensesController < ApplicationController
   end
 
   def edit
-    
+    @expense = Expense.find(params[:id]) 
+    @categories = Category.all    
   end
 
   def update

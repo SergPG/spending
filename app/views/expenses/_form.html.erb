@@ -1,0 +1,43 @@
+<div class="container" >
+    <div class="row ">
+        <%= form_with model: expense, class: "container-sm" do |form| %>
+                            
+            <div class=" col-auto mb-1">
+                <%= form.label :category_id , class: "form-label" %>
+                                
+                <%= form.select :category_id,
+                    categories.collect { |category| [ category.name , category.id ] }, {}, {class: "form-select"} %>
+                                    
+                <% expense.errors.full_messages_for(:category_id)
+                    .each do |message| %>
+                        <div><%= message %></div>
+                    <% end %>    
+            </div>
+
+            <div class=" col-auto mb-1">
+                <%= form.label :amount , class: "form-label" %>
+                <%= form.text_field :amount, class: "form-control" %>
+
+                <% expense.errors.full_messages_for(:amount)
+                    .each do |message| %>
+                        <div><%= message %></div>
+                    <% end %>    
+            </div>
+
+            <div class=" col-auto mb-1">
+                <%= form.label :description , class: "form-label" %>
+                <%= form.text_area :description, class: "form-control"%>
+                                    
+                <% expense.errors.full_messages_for(:description)
+                    .each do |message| %>
+                        <div><%= message %></div>
+                    <% end %>    
+            </div>
+                                
+            <div class="col-auto my-3">
+                <%= form.submit class: "btn btn-primary" %>
+            </div>
+
+        <% end %>
+    </div>
+</div>
