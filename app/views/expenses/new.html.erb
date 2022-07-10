@@ -1,0 +1,96 @@
+<section class="py-3" id="expenses">
+  <div class="container px-5 my-2">
+
+  <% if user_signed_in? %>
+
+    <div class="row gx-5 justify-content-center">
+      <div class="col-lg-8 col-xl-6">
+        <div class="text-center">
+            <h2 class="fw-bolder">
+               Hello <%= current_user.login %> 
+            </h2>                             
+        </div>
+      </div>
+    </div>         
+  <% else %> 
+        <p> Not User </p>   
+  <% end %>
+  </div>
+
+  <div class="container px-5 my-2"> 
+    <div class="row gx-5 ">
+        <div class="col">
+
+
+            <div class="card shadow">
+                <div class="card-header shadow">
+                    <div class="container">
+                        <div class="row align-items-center justify-content-between">
+                        <div class="col-4 align-items-center">
+                            Total amount: 3000.00 
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+
+                    <%# Form %>
+                    <div class="container" >
+                        <div class="row ">
+                            <%= form_with model: @expense, class: "container-sm" do |form| %>
+                            
+                                <div class=" col-auto mb-1">
+                                    <%= form.label :category_id , class: "form-label" %>
+                                
+                                    <%= form.select :category_id,
+                                        @categories.collect { |category| [ category.name , category.id ] }, {}, {class: "form-select"} %>
+                                    
+                                    <% @expense.errors.full_messages_for(:category_id)
+                                       .each do |message| %>
+                                            <div><%= message %></div>
+                                        <% end %>    
+                                </div>
+
+                                <div class=" col-auto mb-1">
+                                    <%= form.label :amount , class: "form-label" %>
+                                    <%= form.text_field :amount, class: "form-control" %>
+
+                                    <% @expense.errors.full_messages_for(:amount)
+                                       .each do |message| %>
+                                            <div><%= message %></div>
+                                        <% end %>    
+                                </div>
+
+                                <div class=" col-auto mb-1">
+                                    <%= form.label :description , class: "form-label" %>
+                                    <%= form.text_area :description, class: "form-control"%>
+                                    
+                                    <% @expense.errors.full_messages_for(:description)
+                                       .each do |message| %>
+                                            <div><%= message %></div>
+                                        <% end %>    
+                                </div>
+                                
+                                <div class="col-auto my-3">
+                                     <%= form.submit class: "btn btn-primary" %>
+                                </div>
+
+                            <% end %>
+                        </div>
+                    </div>
+                    <%# End Form %>
+
+                </div>
+
+                <div class="card-footer text-muted">
+                    
+                </div> 
+            </div>     
+
+
+
+        </div>   
+    </div>
+  </div>    
+</section>  

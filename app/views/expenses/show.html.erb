@@ -1,0 +1,20 @@
+<section class="py-3" id="expenses">
+  <div class="container px-5 my-2">
+
+  <% if user_signed_in? %>
+
+    <div class="row gx-5 justify-content-center">
+      <div class="col-lg-8 col-xl-6">
+        <div class="text-center">
+            <h2 class="fw-bolder">
+               Show  Expense for <%= current_user.login %> 
+            </h2>                             
+        </div>
+      </div>
+    </div>         
+  <% else %> 
+        <p> Not User </p>   
+  <% end %>
+  </div>
+    
+</section>  

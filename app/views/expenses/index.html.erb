@@ -1,9 +1,7 @@
-
-
-<section class="py-3" id="features">
+<section class="py-3" id="expenses">
   <div class="container px-5 my-2">
 
-     <% if user_signed_in? %>
+  <% if user_signed_in? %>
 
     <div class="row gx-5 justify-content-center">
       <div class="col-lg-8 col-xl-6">
@@ -13,18 +11,10 @@
             </h2>                             
         </div>
       </div>
-    </div>  
-    
-      <%# <p class="notice"><%= notice %>
-      <%# <p class="alert"><%= alert %>
-
-      
-        
-        
-      <% else %> 
-        <p> Not User </p>
-        
-      <% end %>
+    </div>         
+  <% else %> 
+        <p> Not User </p>   
+  <% end %>
   </div>   
 
     
@@ -34,78 +24,74 @@
     
           <div class="card shadow">
             <div class="card-header shadow">
-
-            <div class="container">
-              <div class="row align-items-center justify-content-between">
-                <div class="col-4 align-items-center">
-                     Total amount: 3000.00 
+                  <div class="container">
+                    <div class="row align-items-center justify-content-between">
+                      <div class="col-4 align-items-center">
+                        Total amount: 3000.00 
+                      </div>
+                      <div class="col-auto">
+                        <%= link_to "Add new", new_expense_path, class: "btn btn-primary"  %>
+                      </div>
+                    </div>
                   </div>
-                  <div class="col-auto">
-                      <a href="#" class="btn btn-primary"> 
-                        Add new</a>
-                  </div>
-              </div>
             </div>
 
-            </div>
-            <div class="card-body border-bottom mb-3">
-             
+            <div class="card-body border-bottom mb-3"> 
               <div class="container" >
                 <div class="row justify-content-start">
-
                     <div class="col-auto align-items-center">
                       <label for="categories" class="form-label">Categories</label>
                     </div>
-
                     <div class="col-auto">
-                    <select class="form-select" id = "categories"  aria-label="Default select example">
-                      <option selected>Open this select menu</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                    </div>
-
-                
+                      <select class="form-select" id = "categories"  aria-label="Default select example">
+                        <option selected>Open this select menu</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
+                    </div>  
+                </div>
               </div>
             </div>
 
-            </div>
             <div class="card-body">
-
-             <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
-
-
-
+              <div class="table-responsive-md">
+              <table class="table table-hover align-middle">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Categoty</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <% @expenses.each_with_index do |expense, index| %>
+                  <tr>
+                    <th scope="row"> <%= index + 1 %> </th>
+                    <td> <%= expense.category.name %> </td>
+                    <td> <%= expense.amount %> </td>
+                    <td> <%= expense.description %> </td>
+                    <td> <%= expense.created_at %> </td>
+                    <td>   
+                    
+                    <div class="d-grid gap-2 d-md-block">
+                        <%= link_to "View", expense_path(expense), class: "btn btn-primary"  %>
+                             
+                        <button type="button" class="btn btn-secondary ">Edit</button>
+                        <button type="button" class="btn btn-danger ">Delete</button>
+                    </div>
+                    
+                    </td>
+                  </tr>
+              <% end %>             
+                </tbody>
+              </table>
+              </div>
             </div>
+
             <div class="card-footer text-muted">
                 2 days ago
             </div>     

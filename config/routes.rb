@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  root to: "expenses#index"
+  get 'home/index'
+  root to: 'home#index'
 
-  resources :expenses, only: [:index]
+  resources :expenses
 end
