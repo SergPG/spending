@@ -6,7 +6,7 @@ class ExpensesController < ApplicationController
   end
 
   def show
-
+    @expense = Expense.find(params[:id]) 
   end  
 
   def new
@@ -15,7 +15,6 @@ class ExpensesController < ApplicationController
   end
 
   def create
-     
     #binding.pry
     @expense = current_user.expenses.new(expense_params)
 
@@ -24,10 +23,6 @@ class ExpensesController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-    
-    
-    #binding.pry
-    
   end
 
   def edit
@@ -36,10 +31,20 @@ class ExpensesController < ApplicationController
   end
 
   def update
-    
+    @expense = Expense.find(params[:id]) 
+
+    if @expense.update(expense_params)
+      redirect_to @expense
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
+    @expense = Expense.find(params[:id])
+    @expense.destroy
+
+    redirect_to expenses_path, status: :see_other
     
   end
 

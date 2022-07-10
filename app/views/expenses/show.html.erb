@@ -3,18 +3,80 @@
 
   <% if user_signed_in? %>
 
-    <div class="row gx-5 justify-content-center">
+    <%# <div class="row gx-5 justify-content-center">
       <div class="col-lg-8 col-xl-6">
         <div class="text-center">
             <h2 class="fw-bolder">
-               Show  Expense for <%= current_user.login %> 
+                New Expense  
             </h2>                             
         </div>
       </div>
-    </div>         
+    </div>          %>
   <% else %> 
         <p> Not User </p>   
   <% end %>
   </div>
-    
+
+  <div class="container px-5 my-2"> 
+    <div class="row gx-5 ">
+        <div class="col">
+
+
+            <div class="card shadow">
+                <div class="card-header shadow">
+                    <div class="container">
+                        <div class="row align-items-center justify-content-between">
+                        <div class="col-4 align-items-center">
+                            Show Expense 
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                  <div class="container">
+
+
+                  <h3 class="card-title mb-3">
+                    <%= @expense.category.name  %> expenses
+                  </h3>
+
+                  <div class="row gx-5 border-bottom mb-3">
+                    <div class="col-lg-aoto mb-5 mb-lg-0">
+                        <h5 class="card-title">
+                          Amount:
+                        </h5>
+                        <p class="card-text">
+                          <%= @expense.amount%>
+                        </p>
+                    </div>   
+                  </div>
+                  
+                  <div class="row gx-5 border-bottom mb-3">
+                    <div class="col-lg-aoto mb-5 mb-lg-0">
+                        <h5 class="card-title">
+                          Description:
+                        </h5>
+                        <p class="card-text">
+                          <%= @expense.description%>
+                        </p>
+                    </div>   
+                  </div>
+                  
+
+
+
+                  </div>
+                </div>
+
+                <div class="card-footer text-muted">
+                   Date: <%= @expense.updated_at %>
+                </div> 
+            </div>     
+
+
+
+        </div>   
+    </div>
+  </div>    
 </section>  
