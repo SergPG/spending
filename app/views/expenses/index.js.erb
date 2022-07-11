@@ -1,0 +1,1 @@
+$('#expenses_list').html("<%= escape_javascript(raw render :partial => 'expenses_list', :locals => {:expenses => expenses}).html_safe %>");
