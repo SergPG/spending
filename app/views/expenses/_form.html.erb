@@ -16,7 +16,7 @@
 
             <div class=" col-auto mb-1">
                 <%= form.label :amount , class: "form-label" %>
-                <%= form.text_field :amount, class: "form-control" %>
+                <%= form.text_field :amount, required: true, class: "form-control" %>
 
                 <% expense.errors.full_messages_for(:amount)
                     .each do |message| %>
@@ -32,6 +32,14 @@
                     .each do |message| %>
                         <div><%= message %></div>
                     <% end %>    
+            </div>
+
+            <div class="col-auto mb-1">
+              <div class="form-check form-switch">
+                <%= form.check_box :status, { class: "form-check-input", id: "flexSwitchCheckDefault", role: "switch" }, "shared", "hidden" %>
+<!--                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">-->
+                <label class="form-check-label" for="flexSwitchCheckDefault">Share with other users</label>
+              </div>
             </div>
                                 
             <div class="col-auto my-3">

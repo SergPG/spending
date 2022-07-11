@@ -38,7 +38,7 @@
 
 
                   <h3 class="card-title mb-3">
-                    <%= @expense.category.name  %> expenses
+                    <%= expense.category.name  %> expenses
                   </h3>
 
                   <div class="row gx-5 border-bottom mb-3">
@@ -47,7 +47,7 @@
                           Amount:
                         </h5>
                         <p class="card-text">
-                          <%= @expense.amount%>
+                          <%= expense.amount%>
                         </p>
                     </div>   
                   </div>
@@ -58,23 +58,24 @@
                           Description:
                         </h5>
                         <p class="card-text">
-                          <%= @expense.description%>
+                          <%= expense.description%>
                         </p>
                     </div>   
                   </div>
                   
-
+                  <div class="form-check form-switch">
+                    <%= check_box_tag :status, expense.status, expense.shared?, {disabled: true, class: "form-check-input", id: "flexSwitchCheckDisabled", role: "switch"} %>
+                    <label class="form-check-label">Share with other users</label>
+                  </div>
 
 
                   </div>
                 </div>
 
                 <div class="card-footer text-muted">
-                   Date: <%= @expense.updated_at %>
+                   Date: <%= expense.updated_at %>
                 </div> 
             </div>     
-
-
 
         </div>   
     </div>

@@ -1,0 +1,42 @@
+<div class="card-body">
+  <div class="table-responsive-md">
+    <table class="table table-hover align-middle">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Categoty</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Description</th>
+        <th scope="col">Date</th>
+        <th scope="col">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% expenses.each_with_index do |expense, index| %>
+        <tr>
+          <th scope="row"> <%= index + 1 %> </th>
+          <td> <%= expense.category.name %> </td>
+          <td> <%= expense.decorate.amount_money_format %> </td>
+          <td> <%= expense.description %> </td>
+          <td> <%= expense.created_at %> </td>
+          <td>
+
+            <div class="d-grid gap-2 d-md-block">
+              <%= link_to "View", expense_path(expense), class: "btn btn-primary"  %>
+              <%= link_to "Edit", edit_expense_path(expense), class: "btn btn-secondary"  %>
+
+              <%= link_to "Delete", expense_path(expense),
+                          data: { turbo_method: :delete,
+                                  turbo_confirm: "Are you sure?"},
+                          class: "btn btn-danger"
+              %>
+
+            </div>
+
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
