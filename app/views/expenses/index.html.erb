@@ -58,12 +58,11 @@
               </div>
             </div>
 
+            <div id="expenses_list">
+              <%= render "expenses_list", expenses: expenses %>
+            </div>
 
-            <div id="expenses_list"><%= render "expenses_list", expenses: expenses %></div>
-
-            <div class="card-footer text-muted">
-                2 days ago
-            </div>     
+            <div class="card-footer text-muted"></div>     
           </div>
 
       </div>   
