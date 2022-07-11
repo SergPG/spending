@@ -1,10 +1,10 @@
 class ExpensesController < ApplicationController
   def index
     # @categories = Category.all #current_user.categories.distinct
-    @total_expenses_amount = expenses.sum(:amount)
+    total_expenses_amount = expenses.sum(:amount)
     respond_to do |format|
-      format.html { render :index, locals: { categories: categories, total_expenses_amount: @total_expenses_amount, expenses: expenses } }
-      format.js { render :index, locals: { total_expenses_amount: @total_expenses_amount, expenses: expenses } }
+      format.html { render :index, locals: { categories: categories, total_expenses_amount: total_expenses_amount, expenses: expenses } }
+      format.js { render :index, locals: { total_expenses_amount: total_expenses_amount, expenses: expenses } }
     end
   end
 
@@ -13,22 +13,22 @@ class ExpensesController < ApplicationController
   end  
 
   def new
-    @expense = Expense.new(params.permit(:category_id))
-    render :new, locals: { categories: categories, expense: @expense }
+    new_expense = Expense.new(params.permit(:category_id))
+    render :new, locals: { categories: categories, expense: new_expense }
   end
 
   def create
-    @expense = current_user.expenses.new(expense_params)
+    new_expense = current_user.expenses.new(expense_params)
 
-    if @expense.save
-      redirect_to @expense
+    if new_expense.save
+      redirect_to new_expense
     else
       render :new, status: :unprocessable_entity
     end
   end
 
   def edit
-    render :new, locals: { categories: categories, expense: expense }
+    render :edit, locals: { categories: categories, expense: expense }
   end
 
   def update
@@ -66,7 +66,7 @@ class ExpensesController < ApplicationController
   def expenses
     @expense ||= current_user.expenses
                              .where(filter_params)
-                             .order(created_at: :desc)
+                             .order(updated_at: :desc)
   end
 
   def categories
