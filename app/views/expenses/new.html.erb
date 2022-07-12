@@ -1,6 +1,15 @@
 <section class="py-3" id="expenses">
   <div class="container px-5 my-2">
 
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <%= link_to "Expenses", expenses_path %>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Update Expense</li>
+        </ol>
+      </nav>
+
   <% if user_signed_in? %>
 
     <%# <div class="row gx-5 justify-content-center">

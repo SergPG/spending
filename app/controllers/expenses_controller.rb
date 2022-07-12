@@ -46,7 +46,7 @@ class ExpensesController < ApplicationController
   end
 
   def share
-
+    render :share, locals: { shared_expenses: shared_expenses }
   end  
 
 
@@ -70,6 +70,10 @@ class ExpensesController < ApplicationController
     @expense ||= current_user.expenses
                              .where(filter_params)
                              .order(updated_at: :desc)
+  end
+
+  def shared_expenses
+    @shared_expenses ||= Expense.by_shared_group_user_category(Expense::DEFAULT_LIMIT)
   end
 
   def categories
