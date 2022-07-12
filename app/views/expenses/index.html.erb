@@ -27,7 +27,7 @@
                   <div class="container">
                     <div class="row align-items-center justify-content-between">
                       <div class="col-4 align-items-center">
-                        Total amount: <%= total_expenses_amount %>
+                        Total amount: <%=  total_expenses_amount %>
                       </div>
                       <div class="col-auto">
                         <%= link_to "Add new", new_expense_path, class: "btn btn-primary"  %>
@@ -49,10 +49,10 @@
                     <label for="amount" class="form-label">Amount</label>
                   </div>
                   <div class="col-auto">
-                    <%=number_field_tag "amount_min", nil, placeholder: 'Enter min value...'  %>
+                    <%=number_field_tag "amount_min", nil, placeholder: 'Enter min value...', class: "form-control"  %>
                   </div>
                   <div class="col-auto">
-                    <%=number_field_tag "amount_max", nil, placeholder: 'Enter max value...'  %>
+                    <%=number_field_tag "amount_max", nil, placeholder: 'Enter max value...', class: "form-control"  %>
                   </div>
                 </div>
               </div>

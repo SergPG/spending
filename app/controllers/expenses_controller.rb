@@ -1,10 +1,10 @@
 class ExpensesController < ApplicationController
   def index
     # @categories = Category.all #current_user.categories.distinct
-    total_expenses_amount = expenses.sum(:amount)
+    total_expenses_amount =  format("%.2f", expenses.sum(:amount))
     respond_to do |format|
-      format.html { render :index, locals: { categories: categories, total_expenses_amount: total_expenses_amount, expenses: expenses } }
-      format.js { render :index, locals: { total_expenses_amount: total_expenses_amount, expenses: expenses } }
+      format.html { render :index, locals: { categories: categories, total_expenses_amount: total_expenses_amount, expenses: expenses.decorate } }
+      format.js { render :index, locals: { total_expenses_amount: total_expenses_amount, expenses: expenses.decorate } }
     end
   end
 
@@ -43,8 +43,11 @@ class ExpensesController < ApplicationController
     expense.destroy
 
     redirect_to expenses_path, status: :see_other
-    
   end
+
+  def share
+
+  end  
 
 
 
@@ -60,7 +63,7 @@ class ExpensesController < ApplicationController
   end
 
   def expense
-    @expenses ||= Expense.find(params[:id])
+    @expenses ||= Expense.find(params[:id]).decorate
   end
 
   def expenses

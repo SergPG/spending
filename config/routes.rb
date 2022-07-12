@@ -4,5 +4,7 @@ Rails.application.routes.draw do
   get 'home/index'
   root to: 'home#index'
 
-  resources :expenses
+  resources :expenses do
+     get :share, on: :collection 
+  end  
 end
