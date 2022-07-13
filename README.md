@@ -1,24 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Spending - application for monitoring users expenses.
 
-Things you may want to cover:
+How run app:
 
-* Ruby version
+* Install ruby 3.1.2
+* Run `bundle install`
+* Install `sudo apt install postgresql`
+* Following `.env` with credentials
+* Run `rails db:create`
+* Run `rails db:migrate`
+* Start app server: `rails s`
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Running test `rspec`
