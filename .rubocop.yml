@@ -1,0 +1,16 @@
+AllCops:
+  Exclude:
+    - 'bin/*'
+  NewCops: enable
+Style/Documentation:
+  Enabled: false
+Layout/LineLength:
+  Exclude:
+    - 'config/**/*'
+Metrics/BlockLength:
+  Exclude:
+    - 'db/**/*'
+Metrics/MethodLength:
+  Exclude:
+    - 'db/**/*'
+

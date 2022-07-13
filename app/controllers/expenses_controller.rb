@@ -1,20 +1,24 @@
+# frozen_string_literal: true
+
 class ExpensesController < ApplicationController
   def index
     # @categories = Category.all #current_user.categories.distinct
-    total_expenses_amount =  format("%.2f", expenses.sum(:amount))
+    total_expenses_amount = format('%.2f', expenses.sum(:amount))
     respond_to do |format|
-      format.html { render :index, locals: { categories: categories, total_expenses_amount: total_expenses_amount, expenses: expenses.decorate } }
-      format.js { render :index, locals: { total_expenses_amount: total_expenses_amount, expenses: expenses.decorate } }
+      format.html do
+        render :index, locals: { categories:, total_expenses_amount:, expenses: expenses.decorate }
+      end
+      format.js { render :index, locals: { total_expenses_amount:, expenses: expenses.decorate } }
     end
   end
 
   def show
-    render :show, locals: { expense: expense }
-  end  
+    render :show, locals: { expense: }
+  end
 
   def new
     new_expense = Expense.new(params.permit(:category_id))
-    render :new, locals: { categories: categories, expense: new_expense }
+    render :new, locals: { categories:, expense: new_expense }
   end
 
   def create
@@ -28,7 +32,7 @@ class ExpensesController < ApplicationController
   end
 
   def edit
-    render :edit, locals: { categories: categories, expense: expense }
+    render :edit, locals: { categories:, expense: }
   end
 
   def update
@@ -46,10 +50,8 @@ class ExpensesController < ApplicationController
   end
 
   def share
-    render :share, locals: { shared_expenses: shared_expenses }
-  end  
-
-
+    render :share, locals: { shared_expenses: }
+  end
 
   private
 
@@ -63,13 +65,13 @@ class ExpensesController < ApplicationController
   end
 
   def expense
-    @expenses ||= Expense.find(params[:id]).decorate
+    @expense ||= Expense.find(params[:id]).decorate
   end
 
   def expenses
-    @expense ||= current_user.expenses
-                             .where(filter_params)
-                             .order(updated_at: :desc)
+    @expenses ||= current_user.expenses
+                              .where(filter_params)
+                              .order(updated_at: :desc)
   end
 
   def shared_expenses
@@ -81,12 +83,13 @@ class ExpensesController < ApplicationController
   end
 
   def filter_params
-    f_params = params.permit(:category_id).compact_blank
-    if params[:amount]
-      f_params.merge!(amount: params[:amount][:min]..) if params[:amount][:min].present?
-      f_params.merge!(amount: ..params[:amount][:max]) if params[:amount][:max].present?
-    end
-    f_params
+    params.permit(:category_id).compact_blank.merge(amount_params)
   end
 
+  def amount_params
+    amount = params[:amount]&.compact_blank
+    min = amount&.dig(:min)
+    max = amount&.dig(:max)
+    { amount: min..max }
+  end
 end

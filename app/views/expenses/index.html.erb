@@ -85,7 +85,7 @@
             url: 'expenses',
             type: 'GET',
             dataType: 'script',
-            data: { amount: { min: $(this).val() } }
+            data: { amount: { min: $(this).val(), max: $('#amount_max').val() } }
         });
     });
     $('#amount_max').focusout(function(){
@@ -93,7 +93,7 @@
             url: 'expenses',
             type: 'GET',
             dataType: 'script',
-            data: { amount: { max: $(this).val() } }
+            data: { amount: { max: $(this).val(), min: $('#amount_min').val() } }
         });
     });
 </script>

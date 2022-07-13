@@ -1,28 +1,30 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.feature 'Expense create', type: :feature do
-    include Warden::Test::Helpers
+  include Warden::Test::Helpers
 
-    let!(:user) { create :user }
-    let!(:category) {create(:category, name: 'Shops') }
-    let(:amount) {'185.05'}
-    let(:description) {"It is my expenses in the store Brocard"}
-    
-    before { login_as(user) }
+  let!(:user) { create :user }
+  let!(:category) { create(:category, name: 'Shops') }
+  let(:amount) { '185.05' }
+  let(:description) { 'It is my expenses in the store Brocard' }
 
-    scenario 'create new expense' do
-        visit new_expense_path()
-        expect(page).to have_text("New Expense")
-        
-        select(category.name, from:'expense_category_id')
-        fill_in 'expense_amount' , with: amount
-        fill_in 'expense_description' , with: description
-        click_button 'Create Expense'
+  before { login_as(user) }
 
-        expect(page).to have_text("#{category.name} expenses")
-        expect(page).to have_text("#{amount}")
-        expect(page).to have_text("#{description}")
+  scenario 'create new expense' do
+    visit new_expense_path
+    expect(page).to have_text('New Expense')
 
-    #  save_and_open_page  
-    end
+    select(category.name, from: 'expense_category_id')
+    fill_in 'expense_amount', with: amount
+    fill_in 'expense_description', with: description
+    click_button 'Create Expense'
+
+    expect(page).to have_text("#{category.name} expenses")
+    expect(page).to have_text(amount.to_s)
+    expect(page).to have_text(description.to_s)
+
+    #  save_and_open_page
+  end
 end
