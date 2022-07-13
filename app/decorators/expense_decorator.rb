@@ -12,6 +12,6 @@ class ExpenseDecorator < Draper::Decorator
   end
 
   def small_description
-    "#{description[0...20]}..." unless description.empty?
+    description.size > 20 ? "#{description[0...20]}..." : description
   end
 end
