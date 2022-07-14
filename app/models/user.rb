@@ -6,7 +6,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :rememberable, :validatable
 
-  validates :login, presence: true
+  validates :login,
+            presence: true,
+            uniqueness: { case_sensitive: false }
 
   has_many :expenses
   has_many :categories, through: :expenses

@@ -16,6 +16,5 @@ class Expense < ApplicationRecord
                                             .order(updated_at: :desc)
                                             .limit(limit)
                                             .group_by(&:user)
-                                            .inject({}) { |res, (k, v)| res.merge!(k => v.group_by(&:category)) }
                                         }
 end

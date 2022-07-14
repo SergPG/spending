@@ -2,7 +2,6 @@
 
 class ExpensesController < ApplicationController
   def index
-    # @categories = Category.all #current_user.categories.distinct
     total_expenses_amount = format('%.2f', expenses.sum(:amount))
     respond_to do |format|
       format.html do
@@ -75,7 +74,7 @@ class ExpensesController < ApplicationController
   end
 
   def shared_expenses
-    @shared_expenses ||= Expense.by_shared_group_user_category(Expense::DEFAULT_LIMIT)
+    @shared_expenses ||= Expense.by_shared_group_user_category
   end
 
   def categories

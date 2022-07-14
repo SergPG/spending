@@ -41,20 +41,18 @@
                             </thead>
                             <tbody>
                              
-                    <% shared_expenses.each do  |user, categories| %>  
-                              <tr>
-                                <th scope="row" colspan="3" class="table-light"> <%= user.login %> </th>
-                              </tr>  
-                        <% categories.each do  |category, expenses| %>
-                          <%  expenses.each do | expense | %>
+                    <% shared_expenses.each do  |user, expenses| %>  
+                        <tr>
+                          <th scope="row" colspan="3" class="table-light"> <%= user.login %> </th>
+                        </tr>  
+                        <%  expenses.each do | expense | %>
 
-                              <tr>
-                                <td><%= expense.decorate.updated_at_format %></td>
-                                <td><%= expense.decorate.amount_money_format %></td>
-                                <td><%= category.name %></td>
-                              </tr>
+                            <tr>
+                              <td><%= expense.decorate.updated_at_format %></td>
+                              <td><%= expense.decorate.amount_money_format %></td>
+                              <td><%= expense.category.name %></td>
+                            </tr>
 
-                          <% end %>
                         <% end %>
                     <% end %>           
                             </tbody>
